@@ -10,6 +10,7 @@ public class Evento {
 	private Date dataInicial;
 	private Date dataTermino;
 	private Localizacao local;
+	private Evento[] subEventos;
 	
 	public int getCodigo() {
 		return codigo;
@@ -52,6 +53,12 @@ public class Evento {
 	}
 	public void setLocal(Localizacao local) {
 		this.local = local;
+	}
+	public Evento[] getSubEventos() {
+		return subEventos;
+	}
+	public void setSubEventos(Evento[] subEventos) {
+		this.subEventos = subEventos;
 	}
 		
 }
