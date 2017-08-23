@@ -23,6 +23,9 @@ public class Instituicao {
 	public void setLocalizacao(Localizacao localizacao) {
 		this.localizacao = localizacao;
 	}
-	
+	public Instituicao(String nome) {
+		super();
+		this.nome = nome;
+	}
 	
 }

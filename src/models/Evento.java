@@ -53,5 +53,29 @@ public class Evento {
 	public void setLocal(Localizacao local) {
 		this.local = local;
 	}
+	
+	//Constructor Geral (Hardcode)
+	public Evento(int codigo, String nome, String descricao, TipoEvento tipoEvento, Date dataInicial, Date dataTermino,
+			Localizacao local) {
+		super();
+		this.codigo = codigo;
+		this.nome = nome;
+		this.descricao = descricao;
+		this.tipoEvento = tipoEvento;
+		this.dataInicial = dataInicial;
+		this.dataTermino = dataTermino;
+		this.local = local;
+	}
+	
+	//Temporário
+	public Evento(String nome, Localizacao local) {
+		super();
+		this.nome = nome;
+		this.local = local;
+	}
+	
+	public void check_in(Usuario u){
+		
+	}
 		
 }
