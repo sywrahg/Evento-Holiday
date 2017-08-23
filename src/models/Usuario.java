@@ -7,6 +7,7 @@ public class Usuario {
 	private String nome;
 	private String telefone;
 	private ArrayList<Evento> eventosCriados;
+	private ArrayList<Evento> eventosOrganizados;
 	private ArrayList<Evento> eventosParticipados;
 	private ArrayList<Evento> eventosInscritos;
 	
@@ -35,17 +36,30 @@ public class Usuario {
 		this.telefone = telefone;
 	}
 	
-	public Evento novoEvento(String nome, Localizacao local){
+	protected Evento novoEvento(String nome, Localizacao local){
 		Evento eventonovo = new Evento(nome,local);
 		eventosCriados.add(eventonovo);
 		return eventonovo;
 		//TODO - Incompleto, implementar ao BD
 	}
 	
-	public Instituicao cadastrarInstituicao(String nome){
+	protected Instituicao cadastrarInstituicao(String nome){
 		Instituicao i = new Instituicao(nome);
 		//TODO - Incompleto, implementar ao BD
 		return i;
+	}
+	
+	protected void participarEvento(Evento e){
+		eventosParticipados.add(e);
+	}
+	
+	protected void inscreverEmEvento(Evento e){
+		eventosInscritos.add(e);
+	}
+	protected void addOrganizadorAEvento(Evento e, Usuario u){
+		if (eventosCriados.contains(e) || eventosOrganizados.contains(e)) {
+			e.organizadoresEvento.add(u);
+		}
 	}
 	
 }

@@ -1,5 +1,6 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Evento {
@@ -10,6 +11,9 @@ public class Evento {
 	private Date dataInicial;
 	private Date dataTermino;
 	private Localizacao local;
+	private ArrayList<String> tags; //Talvez precise de uma classe Tag?
+	private ArrayList<Atividade> atividades;
+	protected ArrayList<Usuario> organizadoresEvento;
 	
 	public int getCodigo() {
 		return codigo;
@@ -74,8 +78,9 @@ public class Evento {
 		this.local = local;
 	}
 	
-	public void check_in(Usuario u){
-		
+	protected Atividade addAtividade(Atividade a){
+		atividades.add(a);
+		return a;
 	}
 		
 }
