@@ -11,9 +11,13 @@ public class Evento {
 	private Date dataInicial;
 	private Date dataTermino;
 	private Localizacao local;
+<<<<<<< HEAD
 	private ArrayList<String> tags; //Talvez precise de uma classe Tag?
 	private ArrayList<Atividade> atividades;
 	protected ArrayList<Usuario> organizadoresEvento;
+=======
+	private Evento[] subEventos;
+>>>>>>> refs/remotes/origin/master
 	
 	public int getCodigo() {
 		return codigo;
@@ -57,6 +61,7 @@ public class Evento {
 	public void setLocal(Localizacao local) {
 		this.local = local;
 	}
+<<<<<<< HEAD
 	
 	//Constructor Geral (Hardcode)
 	public Evento(int codigo, String nome, String descricao, TipoEvento tipoEvento, Date dataInicial, Date dataTermino,
@@ -81,6 +86,13 @@ public class Evento {
 	protected Atividade addAtividade(Atividade a){
 		atividades.add(a);
 		return a;
+=======
+	public Evento[] getSubEventos() {
+		return subEventos;
+	}
+	public void setSubEventos(Evento[] subEventos) {
+		this.subEventos = subEventos;
+>>>>>>> refs/remotes/origin/master
 	}
 		
 }
