@@ -1,9 +1,15 @@
 package models;
 
+import java.util.ArrayList;
+
 public class Usuario {
 	private String CPF;
 	private String nome;
 	private String telefone;
+	private ArrayList<Evento> eventosCriados;
+	private ArrayList<Evento> eventosOrganizados;
+	private ArrayList<Evento> eventosParticipados;
+	private ArrayList<Evento> eventosInscritos;
 	
 	public Usuario(String cpf, String nome, String tel) {
 		this.CPF = cpf;
@@ -29,6 +35,31 @@ public class Usuario {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-
+	
+	protected Evento novoEvento(String nome, Localizacao local){
+		Evento eventonovo = new Evento(nome,local);
+		eventosCriados.add(eventonovo);
+		return eventonovo;
+		//TODO - Incompleto, implementar ao BD
+	}
+	
+	protected Instituicao cadastrarInstituicao(String nome){
+		Instituicao i = new Instituicao(nome);
+		//TODO - Incompleto, implementar ao BD
+		return i;
+	}
+	
+	protected void participarEvento(Evento e){
+		eventosParticipados.add(e);
+	}
+	
+	protected void inscreverEmEvento(Evento e){
+		eventosInscritos.add(e);
+	}
+	protected void addOrganizadorAEvento(Evento e, Usuario u){
+		if (eventosCriados.contains(e) || eventosOrganizados.contains(e)) {
+			e.organizadoresEvento.add(u);
+		}
+	}
 	
 }
