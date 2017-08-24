@@ -1,5 +1,6 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Evento {
@@ -10,7 +11,9 @@ public class Evento {
 	private Date dataInicial;
 	private Date dataTermino;
 	private Localizacao local;
-	private Evento[] subEventos;
+	private ArrayList<String> tags; //Talvez precise de uma classe Tag?
+	private ArrayList<Atividade> atividades;
+	protected ArrayList<Usuario> organizadoresEvento;
 	
 	public int getCodigo() {
 		return codigo;
@@ -54,11 +57,30 @@ public class Evento {
 	public void setLocal(Localizacao local) {
 		this.local = local;
 	}
-	public Evento[] getSubEventos() {
-		return subEventos;
+	
+	//Constructor Geral (Hardcode)
+	public Evento(int codigo, String nome, String descricao, TipoEvento tipoEvento, Date dataInicial, Date dataTermino,
+			Localizacao local) {
+		super();
+		this.codigo = codigo;
+		this.nome = nome;
+		this.descricao = descricao;
+		this.tipoEvento = tipoEvento;
+		this.dataInicial = dataInicial;
+		this.dataTermino = dataTermino;
+		this.local = local;
 	}
-	public void setSubEventos(Evento[] subEventos) {
-		this.subEventos = subEventos;
+	
+	//Temporário
+	public Evento(String nome, Localizacao local) {
+		super();
+		this.nome = nome;
+		this.local = local;
+	}
+	
+	protected Atividade addAtividade(Atividade a){
+		atividades.add(a);
+		return a;
 	}
 		
 }
