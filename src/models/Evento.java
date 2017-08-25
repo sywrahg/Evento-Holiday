@@ -3,6 +3,8 @@ package models;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.swing.JOptionPane;
+
 public class Evento {
 	private int codigo;
 	private String nome;
@@ -14,7 +16,43 @@ public class Evento {
 	private ArrayList<String> tags; //Talvez precise de uma classe Tag?
 	private ArrayList<Atividade> atividades;
 	protected ArrayList<Usuario> organizadoresEvento;
+	protected Evento eventoPai;
+	protected ArrayList<Evento> eventosFilhos;
+	private ArrayList<EspacoFisico> espacos;
 	
+	public ArrayList<String> getTags() {
+		return tags;
+	}
+	public void setTags(ArrayList<String> tags) {
+		this.tags = tags;
+	}
+	public ArrayList<Atividade> getAtividades() {
+		return atividades;
+	}
+	public void setAtividades(ArrayList<Atividade> atividades) {
+		this.atividades = atividades;
+	}
+	public ArrayList<Usuario> getOrganizadoresEvento() {
+		return organizadoresEvento;
+	}
+	public void setOrganizadoresEvento(ArrayList<Usuario> organizadoresEvento) {
+		this.organizadoresEvento = organizadoresEvento;
+	}
+	public Evento getEventoPai() {
+		return eventoPai;
+	}
+	public ArrayList<Evento> getEventosFilhos() {
+		return eventosFilhos;
+	}
+	public void setEventosFilhos(ArrayList<Evento> eventosFilhos) {
+		this.eventosFilhos = eventosFilhos;
+	}
+	public ArrayList<EspacoFisico> getEspacos() {
+		return espacos;
+	}
+	public void setEspacos(ArrayList<EspacoFisico> espacos) {
+		this.espacos = espacos;
+	}
 	public int getCodigo() {
 		return codigo;
 	}
@@ -81,6 +119,29 @@ public class Evento {
 	protected Atividade addAtividade(Atividade a){
 		atividades.add(a);
 		return a;
+	}
+	
+	protected EspacoFisico addEspaco(EspacoFisico espaco){
+		espacos.add(espaco);
+		return espaco;
+	}
+	
+	protected void addSubEvento(Evento e){
+		if(eventoPai == null){
+			eventosFilhos.add(e);
+		}
+		else if(eventoPai != null){
+			JOptionPane.showMessageDialog(null, "Opa...Seu evento não pode ter sub-eventos se ele mesmo for um sub-evento!");
+		}
+	}
+
+	protected void setEventoPai(Evento e){
+		if(eventosFilhos.isEmpty()){
+			eventoPai = e;
+		}
+		else if(eventosFilhos.isEmpty() == false){
+			JOptionPane.showMessageDialog(null, "Opa...Seu evento não pode ter evento-pai se ele tiver um sub-evento!");
+		}
 	}
 		
 }

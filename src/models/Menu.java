@@ -9,8 +9,30 @@ import javax.swing.JOptionPane;
 
 public class Menu {
 	
+	private static Menu instance = null;
+	private Usuario usuario = new Usuario("Não possui", "--------","Não possui");
+	
 	public static void main(String[] args) {
 		mainMenu();
+	}
+	
+	protected Menu(){
+		//Criado somente devido ao padrão Singleton
+	}
+	
+	public static Menu getInstance(){
+		if(instance == null){
+			instance = new Menu();
+		}
+		return instance;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	private static void mainMenu() {
@@ -50,11 +72,8 @@ public class Menu {
 		
 	}
 	
+	//Criador de menus:
 	private static int makeMenu(String menuName, Map<Integer, String> map){
-		//Opções disponíveis:
-		map.put(1, "Criar novo evento");
-		map.put(2, "Participar de evento");
-		
 		String msgText = menuName + ": \n\n";
 		for (Iterator<Entry<Integer, String>> entries = map.entrySet().iterator(); entries.hasNext(); ) {
 		    Entry<Integer, String> entry = entries.next();
