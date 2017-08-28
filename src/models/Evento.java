@@ -142,6 +142,5 @@ public class Evento {
 		else if(eventosFilhos.isEmpty() == false){
 			JOptionPane.showMessageDialog(null, "Opa...Seu evento não pode ter evento-pai se ele tiver um sub-evento!");
 		}
-	}
-		
+	}	
 }

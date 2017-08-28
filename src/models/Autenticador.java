@@ -18,14 +18,14 @@ public class Autenticador {
 		for (int i = 0; i < this.usuariosCadastrados.size(); i++) {
 			System.out.println("Recebeu - Usuario: " + username + " Senha: " + password);
 			System.out.println("Vendo user: " + i);
+			System.out.println(this.usuariosCadastrados.get(i).toString());
+			System.out.println(this.usuariosCadastrados.get(i).getLogin());
+			System.out.println(this.usuariosCadastrados.get(i).getSenha());
 			//Não entra aqui, não sei porquê
-			if (this.usuariosCadastrados.get(i).getLogin() == username) {
+			if (this.usuariosCadastrados.get(i).getLogin() == username && this.usuariosCadastrados.get(i).getSenha() == password) {
 				System.out.println("Achou user:");
 				System.out.println("Login: " + this.usuariosCadastrados.get(i).getLogin() + "Senha: " + this.usuariosCadastrados.get(i).getSenha());
-				if(this.usuariosCadastrados.get(i).getSenha() == password){
-					System.out.println(this.usuariosCadastrados.get(i).getSenha() + this.usuariosCadastrados.get(i).getLogin());
-					return this.usuariosCadastrados.get(i);
-				}
+				return this.usuariosCadastrados.get(i);
 			}
 		}
 		return semLogin;

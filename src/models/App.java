@@ -25,7 +25,8 @@ public class App {
 	
 	//Main
 	public static void main(String[] args) {
-		firstMenu();
+		//firstMenu();
+		MenuHelper.createEventoWindow(a);
 	}
 	
 	//Get/Set Usuário Logado
@@ -86,7 +87,8 @@ public class App {
 		switch (op) {
 		//Funções para cada opção:
 		case 1:
-			System.out.println("Teste");
+			
+			//MenuHelper.makeMenu("Adicionar evento", map)
 			break;
 		default:
 			JOptionPane.showConfirmDialog(null, "Por favor, informe um valor válido");

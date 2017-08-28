@@ -51,7 +51,12 @@ public class Usuario {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Usuario [nome=" + nome + ", login=" + login + ", senha=" + senha + "]";
+	}
+
 	protected Evento novoEvento(String nome, Localizacao local){
 		Evento eventonovo = new Evento(nome,local);
 		eventosCriados.add(eventonovo);

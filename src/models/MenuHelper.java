@@ -1,5 +1,6 @@
 package models;
 
+import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -10,6 +11,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
+import org.omg.CORBA.DynAnyPackage.TypeMismatch;
 
 public class MenuHelper {
 
@@ -30,7 +34,7 @@ public class MenuHelper {
 	    JPasswordField password = new JPasswordField(20);
 
 	    JPanel myPanel = new JPanel();
-	    myPanel.add(new JLabel("Usuário:"));
+	    myPanel.add(new JLabel("Usuário:\n"));
 	    myPanel.add(username);
 	    myPanel.add(Box.createHorizontalStrut(15)); // Espacinho pra separar login e senha
 	    myPanel.add(new JLabel("Senha:"));
@@ -56,10 +60,32 @@ public class MenuHelper {
 		String senha = s[1];
 		Usuario u = new Usuario(nome, login, senha);
 		a.usuariosCadastrados.add(u);
-		//teste
-		for (int i = 0; i < a.usuariosCadastrados.size(); i++) {
-			System.out.println(i + " " + a.usuariosCadastrados.get(i).getLogin() + "  " + a.usuariosCadastrados.get(i).getSenha());
-		}
+	}
+	
+	public static void createEventoWindow(Autenticador a){
+		JTextField nomeEventoField = new JTextField(20);
+	    JTextField descricaoEventoField = new JTextField(30);
+	    JTextField localEventoField = new JTextField(15);
+	    JTextField tipoEventoField = new JTextField(15);
+	    JTextField dtInicioField = new JTextField(15);
+	    JTextField dtTerminoField = new JTextField(15);
+
+	    JPanel myPanel = new JPanel();
+	    myPanel.add(new JLabel("Nome de evento:", SwingConstants.RIGHT));
+	    myPanel.add(nomeEventoField);
+	    myPanel.add(new JLabel("Descrição:", SwingConstants.RIGHT));
+	    myPanel.add(descricaoEventoField);
+	    myPanel.add(new JLabel("Local do Evento:", SwingConstants.RIGHT));
+	    myPanel.add(localEventoField);
+	    myPanel.add(new JLabel("Tipo de Evento:", SwingConstants.RIGHT));
+	    myPanel.add(tipoEventoField);
+	    myPanel.add(new JLabel("Data de início:", SwingConstants.RIGHT));
+	    myPanel.add(dtInicioField);
+	    myPanel.add(new JLabel("Data de término:", SwingConstants.RIGHT));
+	    myPanel.add(dtTerminoField);	   
+
+	    int result = JOptionPane.showConfirmDialog(null, myPanel, 
+	             "Insira os dados do Evento:", JOptionPane.OK_CANCEL_OPTION);
 	}
 
 }
