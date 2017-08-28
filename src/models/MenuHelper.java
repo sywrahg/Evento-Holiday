@@ -56,6 +56,10 @@ public class MenuHelper {
 		String senha = s[1];
 		Usuario u = new Usuario(nome, login, senha);
 		a.usuariosCadastrados.add(u);
+		//teste
+		for (int i = 0; i < a.usuariosCadastrados.size(); i++) {
+			System.out.println(i + " " + a.usuariosCadastrados.get(i).getLogin() + "  " + a.usuariosCadastrados.get(i).getSenha());
+		}
 	}
 
 }

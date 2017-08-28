@@ -42,8 +42,9 @@ public class App {
 		Map<Integer, String> mainMenuOpcoes = new HashMap<Integer,String>();
 		mainMenuOpcoes.put(1, "Fazer Log-in");
 		mainMenuOpcoes.put(2, "Cadastrar novo usuário");
-		mainMenuOpcoes.put(9, "Sair do programa");
-		int op = 0;
+		mainMenuOpcoes.put(0, "Sair do programa");
+		int op = -1;
+		try{
 		op = MenuHelper.makeMenu("", mainMenuOpcoes);
 		switch (op) {
 		//Funções para cada opção:
@@ -53,7 +54,7 @@ public class App {
 				JOptionPane.showMessageDialog(null, "Usuário não encontrado.");
 				firstMenu();
 			}
-			else{
+			else if(!tempUsuario.equals(a.semLogin)){
 				usuario = tempUsuario;
 				mainMenu();
 			}
@@ -61,10 +62,17 @@ public class App {
 		case 2:
 			MenuHelper.createUserWindow(a);
 			firstMenu();
+		case 0:
+			break;
 		default:
 			JOptionPane.showMessageDialog(null, "Por favor, informe um valor válido");
 			firstMenu();
 			break;
+		}
+		
+		}catch(NumberFormatException e){
+			JOptionPane.showMessageDialog(null, "Por favor, informe um valor válido");
+			firstMenu();
 		}
 	}
 	
