@@ -16,6 +16,7 @@ public class Evento {
 	private ArrayList<String> tags; //Talvez precise de uma classe Tag?
 	private ArrayList<Atividade> atividades;
 	protected ArrayList<Usuario> organizadoresEvento;
+	protected ArrayList<Instituicao> instituicoesOrganizadoras;
 	protected Evento eventoPai;
 	protected ArrayList<Evento> eventosFilhos;
 	private ArrayList<EspacoFisico> espacos;
@@ -143,4 +144,8 @@ public class Evento {
 			JOptionPane.showMessageDialog(null, "Opa...Seu evento não pode ter evento-pai se ele tiver um sub-evento!");
 		}
 	}	
+	
+	protected void addInstituicao(Instituicao i){
+		instituicoesOrganizadoras.add(i);
+	}
 }
