@@ -5,18 +5,34 @@ import java.util.ArrayList;
 public class Usuario {
 	private String CPF;
 	private String nome;
+	private String login;
+	private String senha;
 	private String telefone;
 	private ArrayList<Evento> eventosCriados;
 	private ArrayList<Evento> eventosOrganizados;
 	private ArrayList<Evento> eventosParticipados;
 	private ArrayList<Evento> eventosInscritos;
 	
-	public Usuario(String cpf, String nome, String tel) {
-		this.CPF = cpf;
+	public Usuario(String nome, String login, String senha) {
+		super();
 		this.nome = nome;
-		this.telefone = tel;
+		this.login = login;
+		this.senha = senha;
 	}
-	
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getSenha() {
+		String s = this.senha;
+		return s;
+	}
+
 	public String getCPF() {
 		return CPF;
 	}
@@ -35,7 +51,12 @@ public class Usuario {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Usuario [nome=" + nome + ", login=" + login + ", senha=" + senha + "]";
+	}
+
 	protected Evento novoEvento(String nome, Localizacao local){
 		Evento eventonovo = new Evento(nome,local);
 		eventosCriados.add(eventonovo);
