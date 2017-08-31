@@ -1,25 +1,41 @@
 package models;
 
-import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import javax.swing.JOptionPane;
 
 public class Cupom {
 	private String codigo;
-	private Date data;
+	private String data;
 	private double valor;
 	private double valorSemDesconto;
 	private double desconto;
 	private double valorTotal;
 	
 	public Boolean validarCodigoDoCupom (String validarCodigo) {
-		if (validarCodigo.equals("ads0544")){
-			JOptionPane.showMessageDialog(null, "DESCONTO ADICIONADO!!");
-			return true;
-		}else {
+		try {
+			if (validarCodigo.equals("ads0544")){
+				JOptionPane.showMessageDialog(null, "DESCONTO ADICIONADO!!");
+				return true;
+			}	
+		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null, "CÓDIGO INVÁLIDO, INSIRA UM NOVO CÓDIGO!!");
+		}
+		return false;
+	}
+	
+	public boolean validarData (String data) {
+		try {
+		SimpleDateFormat dataDeValidade = new SimpleDateFormat("dd/MM/yyyy");
+		dataDeValidade.setLenient(false);
+		dataDeValidade.parse(data);
+		return true;
+		} catch (ParseException ex) {
+			System.out.println("Data invalida!");
 			return false;
 		}
+		
 	}
 	
 	public double desconto (double valor) {
@@ -40,11 +56,11 @@ public class Cupom {
 		this.codigo = codigo;
 	}
 
-	public Date getData() {
+	public String getData() {
 		return data;
 	}
 
-	public void setData(Date data) {
+	public void setData(String data) {
 		this.data = data;
 	}
 
