@@ -1,16 +1,21 @@
 package models;
 
+import java.util.Calendar;
+import java.util.List;
+
 public class Atividade {
 	private String nome;
-	private String horaInicial;
-	private String horaTermino;
+	private Calendar horaInicial;
+	private Calendar horaTermino;
 	private String local;
 	private TipoAtividade tipoAtividade;
 	private double valor;
 	private Usuario registrador;
-	private Atividade[] atividadesProibidas;
+	private List<Atividade> atividadesProibidas;
+	private ResponsavelAtividade responsavel;
 	
-	public Atividade(String nome, String horaInicio, String horaFim, String local, TipoAtividade tipo, double valor, Usuario registrador) {
+	
+	public Atividade(String nome, Calendar horaInicio, Calendar horaFim, String local, TipoAtividade tipo, double valor, Usuario registrador, ResponsavelAtividade responsavel) {
 		this.nome = nome;
 		this.horaInicial = horaInicio;
 		this.horaTermino = horaFim;
@@ -18,9 +23,10 @@ public class Atividade {
 		this.tipoAtividade = tipo;
 		this.valor = valor;
 		this.registrador = registrador;
+		this.responsavel = responsavel;
 	}
 	
-	public void AtividadePadrao(String nome, String horaInicio, String horaFim, String local){
+	public void AtividadePadrao(String nome, Calendar horaInicio, Calendar horaFim, String local){
 		this.nome = nome;
 		this.horaInicial = horaInicio;
 		this.horaTermino = horaFim;
@@ -28,6 +34,27 @@ public class Atividade {
 		this.tipoAtividade = TipoAtividade.PADRAO; 
 	}
 	
+	public void VerificaConcomitancia(List<Atividade> itensInscricao) throws RuntimeException{
+		for (Atividade item : itensInscricao) {
+			for (Atividade atividade : this.atividadesProibidas) {
+				if(item == atividade){
+					throw new RuntimeException("Você está tentando se inscrever em atividades não compatíveis");
+				}else{
+					VerificaChoqueHorario(itensInscricao);
+				}
+			}
+		}
+	}
+	
+	public void VerificaChoqueHorario(List<Atividade> itensInscricao) throws RuntimeException{
+		for (Atividade item : itensInscricao) {
+			for (Atividade atividade : itensInscricao) {
+				if(item.horaInicial.getTimeInMillis() <= atividade.horaInicial.getTimeInMillis() && item.horaInicial.getTimeInMillis() <= atividade.horaTermino.getTimeInMillis()){
+					throw new RuntimeException("Choque de horário na atividade");
+				}
+			}		
+		}
+	}
 		
 	public String getNome() {
 		return nome;
@@ -35,16 +62,16 @@ public class Atividade {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getHoraInicial() {
+	public Calendar getHoraInicial() {
 		return horaInicial;
 	}
-	public void setHoraInicial(String horaInicial) {
+	public void setHoraInicial(Calendar horaInicial) {
 		this.horaInicial = horaInicial;
 	}
-	public String getHoraTermino() {
+	public Calendar getHoraTermino() {
 		return horaTermino;
 	}
-	public void setHoraTermino(String horaTermino) {
+	public void setHoraTermino(Calendar horaTermino) {
 		this.horaTermino = horaTermino;
 	}
 	public String getLocal() {
@@ -72,12 +99,20 @@ public class Atividade {
 		this.registrador = registrador;
 	}
 
-	public Atividade[] getAtividadesProibidas() {
+	public List<Atividade> getAtividadesProibidas() {
 		return atividadesProibidas;
 	}
 
-	public void setAtividadesProibidas(Atividade[] atividadesProibidas) {
+	public void setAtividadesProibidas(List<Atividade> atividadesProibidas) {
 		this.atividadesProibidas = atividadesProibidas;
+	}
+
+	public ResponsavelAtividade getResponsavel() {
+		return responsavel;
+	}
+
+	public void setResponsavel(ResponsavelAtividade responsavel) {
+		this.responsavel = responsavel;
 	}
 
 	
