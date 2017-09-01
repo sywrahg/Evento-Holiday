@@ -1,6 +1,7 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Usuario {
 	private String CPF;
@@ -20,67 +21,92 @@ public class Usuario {
 		this.senha = senha;
 	}
 
-	public String getLogin() {
-		return login;
+	protected void addOrganizadorAEvento(Evento e, Usuario u){
+		if (eventosCriados.contains(e) || eventosOrganizados.contains(e)) {
+			e.addOrganizador(u);
+		}
+	}
+	
+	protected void addAtividadeAEvento(Evento e, Atividade a){
+		if (e.isOrganizador(this)) {
+			e.addAtividade(a);
+		}
+	}
+	
+	protected void addSubEvento(Evento pai, Evento filho){
+		if (pai.isOrganizador(this) && filho.isOrganizador(this)) {
+			filho.setEventoPai(pai);
+			pai.addSubEvento(filho);
+		}
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
-	}
-
-	public String getSenha() {
-		String s = this.senha;
-		return s;
+	protected Instituicao cadastrarInstituicao(String nome){
+		Instituicao i = new Instituicao(nome);
+		return i;
 	}
 
 	public String getCPF() {
 		return CPF;
 	}
-	public void setCPF(String cPF) {
-		CPF = cPF;
+	public String getLogin() {
+		return login;
 	}
 	public String getNome() {
 		return nome;
 	}
-	public void setNome(String nome) {
-		this.nome = nome;
+	public String getSenha() {
+		String s = this.senha;
+		return s;
 	}
 	public String getTelefone() {
 		return telefone;
 	}
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
-
-	@Override
-	public String toString() {
-		return "Usuario [nome=" + nome + ", login=" + login + ", senha=" + senha + "]";
+	protected void inscreverEmEvento(Evento e){
+		Inscricao i = new Inscricao();
+		i.setCodigo(1234);
+		i.setInscrito(this);
+		i.setDataInscricao(Calendar.getInstance());
+		i.setStatus(StatusInscricao.EM_ABERTO);
+		eventosInscritos.add(e);
+		e.addInscricao(i);
 	}
 
 	protected Evento novoEvento(String nome, Localizacao local){
 		Evento eventonovo = new Evento(nome,local);
 		eventosCriados.add(eventonovo);
 		return eventonovo;
-		//TODO - Incompleto, implementar ao BD
 	}
-	
-	protected Instituicao cadastrarInstituicao(String nome){
-		Instituicao i = new Instituicao(nome);
-		//TODO - Incompleto, implementar ao BD
-		return i;
-	}
-	
+
 	protected void participarEvento(Evento e){
-		eventosParticipados.add(e);
+		boolean isInscrito = false;
+		for (int i = 0; i < e.getInscricoes().size(); i++) {
+			if (e.getInscricoes().get(i).getInscrito() == this) {
+				isInscrito = true;
+			}
+		}
+		if (isInscrito) {
+			eventosParticipados.add(e);	
+		}
 	}
 	
-	protected void inscreverEmEvento(Evento e){
-		eventosInscritos.add(e);
+	public void setCPF(String cPF) {
+		CPF = cPF;
 	}
-	protected void addOrganizadorAEvento(Evento e, Usuario u){
-		if (eventosCriados.contains(e) || eventosOrganizados.contains(e)) {
-			e.organizadoresEvento.add(u);
-		}
+	
+	public void setLogin(String login) {
+		this.login = login;
+	}
+	
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+	@Override
+	public String toString() {
+		return "Usuario [nome=" + nome + ", login=" + login + ", senha=" + senha + "]";
 	}
 	
 }
