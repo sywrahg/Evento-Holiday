@@ -1,12 +1,13 @@
 package models;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class Inscricao {
 	private int codigo;
 	private Usuario inscrito;
-	private Date dataInscricao;
-	private Date dataVencimento;
+	private Calendar dataInscricao;
+	private Calendar dataVencimento;
 	private StatusInscricao status;
 	
 	public int getCodigo() {
@@ -21,16 +22,16 @@ public class Inscricao {
 	public void setInscrito(Usuario inscrito) {
 		this.inscrito = inscrito;
 	}
-	public Date getDataInscricao() {
+	public Calendar getDataInscricao() {
 		return dataInscricao;
 	}
-	public void setDataInscricao(Date dataInscricao) {
+	public void setDataInscricao(Calendar dataInscricao) {
 		this.dataInscricao = dataInscricao;
 	}
-	public Date getDataVencimento() {
+	public Calendar getDataVencimento() {
 		return dataVencimento;
 	}
-	public void setDataVencimento(Date dataVencimento) {
+	public void setDataVencimento(Calendar dataVencimento) {
 		this.dataVencimento = dataVencimento;
 	}
 	public StatusInscricao getStatus() {
