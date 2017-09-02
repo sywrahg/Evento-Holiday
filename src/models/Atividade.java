@@ -15,6 +15,10 @@ public class Atividade {
 	private ResponsavelAtividade responsavel;
 	
 	
+	public Atividade(){
+		
+	}
+	
 	public Atividade(String nome, Calendar horaInicio, Calendar horaFim, String local, TipoAtividade tipo, double valor, Usuario registrador, ResponsavelAtividade responsavel) {
 		this.nome = nome;
 		this.horaInicial = horaInicio;
