@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import enums.TipoEvento;
+
 public class Evento {
 	private int codigo;
 	private String nome;
@@ -20,21 +22,8 @@ public class Evento {
 	protected List<Instituicao> instituicoesOrganizadoras;
 	protected Evento eventoPai;
 	protected List<Evento> eventosFilhos;
-	protected List<EspacoFisico> espacos;
+	protected List<String> espacos;
 	protected List<Inscricao> inscricoes;
-	
-	//Constructor Geral (Hardcode)
-	public Evento(int codigo, String nome, String descricao, TipoEvento tipoEvento, Calendar dataInicial, Calendar dataTermino,
-			Localizacao local) {
-		super();
-		this.codigo = codigo;
-		this.nome = nome;
-		this.descricao = descricao;
-		this.tipoEvento = tipoEvento;
-		this.dataInicial = dataInicial;
-		this.dataTermino = dataTermino;
-		this.local = local;
-	}
 
 	public Evento(String nome) {
 		super();
@@ -42,23 +31,17 @@ public class Evento {
 		this.codigo = 0;
 	}
 	
-	/*//TODO - Precisa de um construtor de atividade(Que é da sywrah)
-	protected Atividade addAtividade(Usuario u, String nomeatv){
-		if (isOrganizador(this)) {
-			addAtividade(a);
+	protected void addAtividade(Usuario u){
+		if (isOrganizador(u)) {
+			this.atividades.add(new Atividade());
 		}
-		Atividade a = new ;
-		this.atividades.add(a);
-		return a;
-	}*/
-	
-	protected EspacoFisico addEspaco(EspacoFisico espaco){
-		espacos.add(espaco);
-		return espaco;
 	}
-	protected EspacoFisico removeEspaco(EspacoFisico espaco){
+	
+	protected void addEspaco(String espaco){
+		espacos.add(espaco);
+	}
+	protected void removeEspaco(String espaco){
 		espacos.remove(espaco);
-		return espaco;
 	}
 	protected void addInstituicao(String nome){
 		Instituicao i = new Instituicao(nome);
@@ -75,13 +58,24 @@ public class Evento {
 	protected void removeTag(Tag t){
 			this.tags.remove(t);
 	}
-	public void addInscricao(Usuario u){
+	protected void addOrganizador(Usuario u, Usuario adicionado){
+		if (u.getEventosCriados().contains(this) || u.getEventosOrganizados().contains(this)) {
+			this.organizadoresEvento.add(u);
+		}
+	}
+	protected void addInscricao(Usuario u){
 		Inscricao i = new Inscricao(u);
+		this.inscricoes.add(i);
 		u.getEventosInscritos().add(this);
+	}
+	protected void removeInscricao(Inscricao i){
+		i.getInscrito().getEventosInscritos().remove(i);
+		this.inscricoes.remove(i);
 	}
 	protected void addSubEvento(Usuario u, Evento e){
 		if(eventoPai == null && isOrganizador(u)){
 			eventosFilhos.add(e);
+			e.eventoPai = this;
 		}
 	}
 	protected void removeSubEvento(Usuario u, Evento e){
@@ -102,18 +96,13 @@ public class Evento {
 	public Calendar getDataInicial() {
 		return dataInicial;
 	}
-	protected void addOrganizador(Usuario u, Usuario adicionado){
-		if (u.getEventosCriados().contains(this) || u.getEventosOrganizados().contains(this)) {
-			this.organizadoresEvento.add(u);
-		}
-	}
 	public Calendar getDataTermino() {
 		return dataTermino;
 	}
 	public String getDescricao() {
 		return descricao;
 	}
-	public List<EspacoFisico> getEspacos() {
+	public List<String> getEspacos() {
 		return espacos;
 	}
 	public Evento getEventoPai() {
@@ -143,9 +132,6 @@ public class Evento {
 	public Usuario getCriadorEvento() {
 		return criadorEvento;
 	}
-	public void setCriadorEvento(Usuario criadorEvento) {
-		this.criadorEvento = criadorEvento;
-	}
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
@@ -158,19 +144,9 @@ public class Evento {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	
-	public void setEspacos(List<EspacoFisico> espacos) {
-		this.espacos = espacos;
-	}
-	
-	protected void setEventoPai(Evento e){
-		if(eventosFilhos.isEmpty()){
-			eventoPai = e;
-		}
-	}
-	
-	public void setLocal(Localizacao local) {
-		this.local = local;
+	public void setLocal(String cidade, String estado) {
+		Localizacao l = new Localizacao(cidade,estado);
+		this.local = l;
 	}
 	
 	public void setNome(String nome) {

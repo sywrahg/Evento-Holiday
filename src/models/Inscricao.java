@@ -4,6 +4,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 
+import enums.StatusInscricao;
+
 public class Inscricao {
 	private int codigo;
 	private Usuario inscrito;
@@ -29,7 +31,7 @@ public class Inscricao {
 		this.inscrito = inscrito;
 		this.codigo = 0;
 		this.dataInscricao = Calendar.getInstance();
-		this.status = StatusInscricao.EM_ABERTO;
+		this.status = StatusInscricao.PENDENTE;
 	}
 
 	public Evento getEvento() {
