@@ -1,7 +1,8 @@
 package models;
 
-import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+
 import javax.swing.JOptionPane;
 
 public class Evento {
@@ -12,15 +13,15 @@ public class Evento {
 	private Calendar dataInicial;
 	private Calendar dataTermino;
 	private Localizacao local;
-	private ArrayList<Tag> tags;
-	private ArrayList<Atividade> atividades;
+	private List<Tag> tags;
+	private List<Atividade> atividades;
 	private Usuario criadorEvento;
-	protected ArrayList<Usuario> organizadoresEvento;
-	protected ArrayList<Instituicao> instituicoesOrganizadoras;
+	protected List<Usuario> organizadoresEvento;
+	protected List<Instituicao> instituicoesOrganizadoras;
 	protected Evento eventoPai;
-	protected ArrayList<Evento> eventosFilhos;
-	protected ArrayList<EspacoFisico> espacos;
-	protected ArrayList<Inscricao> inscricoes;
+	protected List<Evento> eventosFilhos;
+	protected List<EspacoFisico> espacos;
+	protected List<Inscricao> inscricoes;
 	
 	//Constructor Geral (Hardcode)
 	public Evento(int codigo, String nome, String descricao, TipoEvento tipoEvento, Calendar dataInicial, Calendar dataTermino,
@@ -34,47 +35,65 @@ public class Evento {
 		this.dataTermino = dataTermino;
 		this.local = local;
 	}
-	//Temporário
-	public Evento(String nome, Localizacao local) {
+
+	public Evento(String nome) {
 		super();
 		this.nome = nome;
-		this.local = local;
+		this.codigo = 0;
 	}
-	protected Atividade addAtividade(Atividade a){
-		atividades.add(a);
+	
+	/*//TODO - Precisa de um construtor de atividade(Que é da sywrah)
+	protected Atividade addAtividade(Usuario u, String nomeatv){
+		if (isOrganizador(this)) {
+			addAtividade(a);
+		}
+		Atividade a = new ;
+		this.atividades.add(a);
 		return a;
-	}
+	}*/
+	
 	protected EspacoFisico addEspaco(EspacoFisico espaco){
 		espacos.add(espaco);
 		return espaco;
 	}
-	protected void addInstituicao(Instituicao i){
-		//instituicoesOrganizadoras.add(i);
+	protected EspacoFisico removeEspaco(EspacoFisico espaco){
+		espacos.remove(espaco);
+		return espaco;
+	}
+	protected void addInstituicao(String nome){
+		Instituicao i = new Instituicao(nome);
+		this.instituicoesOrganizadoras.add(i);
+	}
+	protected void removeInstituicao(Instituicao i){
+		this.instituicoesOrganizadoras.remove(i);
 	}
 	protected void addTag(Tag t){
 		if (!this.tags.contains(t)) {
 			this.tags.add(t);
 		}
 	}
-	public void addInscricao(Inscricao i){
-		this.inscricoes.add(i);
+	protected void removeTag(Tag t){
+			this.tags.remove(t);
 	}
-	protected void addSubEvento(Evento e){
-		if(eventoPai == null){
+	public void addInscricao(Usuario u){
+		Inscricao i = new Inscricao(u);
+		u.getEventosInscritos().add(this);
+	}
+	protected void addSubEvento(Usuario u, Evento e){
+		if(eventoPai == null && isOrganizador(u)){
 			eventosFilhos.add(e);
 		}
-		else if(eventoPai != null){
-			JOptionPane.showMessageDialog(null, "Opa...Seu evento não pode ter sub-eventos se ele mesmo for um sub-evento!");
+	}
+	protected void removeSubEvento(Usuario u, Evento e){
+		if(eventoPai == null && isOrganizador(u)){
+			eventosFilhos.add(e);
 		}
 	}
 	public boolean isOrganizador(Usuario u){
-		if (this.getCriadorEvento().equals(u) || this.getOrganizadoresEvento().contains(u)) {
-			return true;
-		}else{
-			return false;
-		}
+		if (this.getCriadorEvento().equals(u) || this.getOrganizadoresEvento().contains(u));
+		return true;
 	}
-	public ArrayList<Atividade> getAtividades() {
+	public List<Atividade> getAtividades() {
 		return atividades;
 	}
 	public int getCodigo() {
@@ -83,8 +102,10 @@ public class Evento {
 	public Calendar getDataInicial() {
 		return dataInicial;
 	}
-	protected void addOrganizador(Usuario u){
-		this.organizadoresEvento.add(u);
+	protected void addOrganizador(Usuario u, Usuario adicionado){
+		if (u.getEventosCriados().contains(this) || u.getEventosOrganizados().contains(this)) {
+			this.organizadoresEvento.add(u);
+		}
 	}
 	public Calendar getDataTermino() {
 		return dataTermino;
@@ -92,13 +113,13 @@ public class Evento {
 	public String getDescricao() {
 		return descricao;
 	}
-	public ArrayList<EspacoFisico> getEspacos() {
+	public List<EspacoFisico> getEspacos() {
 		return espacos;
 	}
 	public Evento getEventoPai() {
 		return eventoPai;
 	}
-	public ArrayList<Evento> getEventosFilhos() {
+	public List<Evento> getEventosFilhos() {
 		return eventosFilhos;
 	}
 	public Localizacao getLocal() {
@@ -107,16 +128,16 @@ public class Evento {
 	public String getNome() {
 		return nome;
 	}
-	public ArrayList<Usuario> getOrganizadoresEvento() {
+	public List<Usuario> getOrganizadoresEvento() {
 		return organizadoresEvento;
 	}
-	public ArrayList<Tag> getTags() {
+	public List<Tag> getTags() {
 		return tags;
 	}
 	public TipoEvento getTipoEvento() {
 		return tipoEvento;
 	}
-	public ArrayList<Inscricao> getInscricoes() {
+	public List<Inscricao> getInscricoes() {
 		return inscricoes;
 	}
 	public Usuario getCriadorEvento() {
@@ -138,7 +159,7 @@ public class Evento {
 		this.descricao = descricao;
 	}
 	
-	public void setEspacos(ArrayList<EspacoFisico> espacos) {
+	public void setEspacos(List<EspacoFisico> espacos) {
 		this.espacos = espacos;
 	}
 	
@@ -146,13 +167,6 @@ public class Evento {
 		if(eventosFilhos.isEmpty()){
 			eventoPai = e;
 		}
-		else if(eventosFilhos.isEmpty() == false){
-			JOptionPane.showMessageDialog(null, "Opa...Seu evento não pode ter evento-pai se ele tiver um sub-evento!");
-		}
-	}
-	
-	public void setEventosFilhos(ArrayList<Evento> eventosFilhos) {
-		this.eventosFilhos = eventosFilhos;
 	}
 	
 	public void setLocal(Localizacao local) {
@@ -163,10 +177,6 @@ public class Evento {
 		this.nome = nome;
 	}
 
-	public void setOrganizadoresEvento(ArrayList<Usuario> organizadoresEvento) {
-		this.organizadoresEvento = organizadoresEvento;
-	}	
-	
 	public void setTipoEvento(TipoEvento tipoEvento) {
 		this.tipoEvento = tipoEvento;
 	}
