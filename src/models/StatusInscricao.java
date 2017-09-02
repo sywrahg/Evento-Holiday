@@ -1,7 +1,7 @@
 package models;
 
 public enum StatusInscricao {
-	PAGO(1), EM_ABERTO(2), VENCIDA(3);
+	PAGO(1), EM_ABERTO(2), VENCIDA(3), VALIDADA(4);
 	
 	public int valorStatusInscricao;
 	
