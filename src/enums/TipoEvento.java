@@ -1,4 +1,4 @@
-package models;
+package enums;
 
 public enum TipoEvento {
 	SIMPOSIO(1), CONGRESSO(2), SEMANA_CIENTIFICA(3), CICLO_DE_PALESTRAS(5);

@@ -2,6 +2,8 @@ package models;
 
 import java.util.Date;
 
+import enums.TipoEvento;
+
 public class Evento {
 	private int codigo;
 	private String nome;

@@ -1,4 +1,4 @@
-package models;
+package enums;
 
 public enum TipoRelacao {
 	APOIO(1), REALIZACAO(2), PATROCINIO(3);

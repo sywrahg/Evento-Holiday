@@ -2,6 +2,8 @@ package models;
 
 import java.util.Date;
 
+import enums.TipoRelacao;
+
 public class Relacao {
 	private Date dataParceria;
 	private TipoRelacao tipoParceria;
