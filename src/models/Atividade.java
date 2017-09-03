@@ -3,6 +3,8 @@ package models;
 import java.util.Calendar;
 import java.util.List;
 
+import enums.TipoAtividade;
+
 public class Atividade {
 	private String nome;
 	private Calendar horaInicial;
@@ -14,7 +16,7 @@ public class Atividade {
 	private List<Atividade> atividadesProibidas;
 	private ResponsavelAtividade responsavel;
 	
-	
+
 	public Atividade(){
 		
 	}
@@ -38,19 +40,19 @@ public class Atividade {
 		this.tipoAtividade = TipoAtividade.PADRAO; 
 	}
 	
-	public void VerificaConcomitancia(List<Atividade> itensInscricao) throws RuntimeException{
+	public void verificaConcomitancia(List<Atividade> itensInscricao) throws RuntimeException{
 		for (Atividade item : itensInscricao) {
 			for (Atividade atividade : this.atividadesProibidas) {
 				if(item == atividade){
 					throw new RuntimeException("Você está tentando se inscrever em atividades não compatíveis");
 				}else{
-					VerificaChoqueHorario(itensInscricao);
+					verificaChoqueHorario(itensInscricao);
 				}
 			}
 		}
 	}
 	
-	public void VerificaChoqueHorario(List<Atividade> itensInscricao) throws RuntimeException{
+	public void verificaChoqueHorario(List<Atividade> itensInscricao) throws RuntimeException{
 		for (Atividade item : itensInscricao) {
 			for (Atividade atividade : itensInscricao) {
 				if(item.horaInicial.getTimeInMillis() <= atividade.horaInicial.getTimeInMillis() && item.horaInicial.getTimeInMillis() <= atividade.horaTermino.getTimeInMillis()){
@@ -119,5 +121,4 @@ public class Atividade {
 		this.responsavel = responsavel;
 	}
 
-	
 }
