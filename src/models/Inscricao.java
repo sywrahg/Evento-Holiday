@@ -28,6 +28,13 @@ public class Inscricao {
 		pagamento.Pagar(responsavel);
 		this.status = StatusInscricao.PAGO;
 	}
+	
+	public void addItemInscricao(Atividade atividade) throws RuntimeException{
+		if(status == StatusInscricao.PAGO){
+			throw new RuntimeException("O item - " + atividade + " - não pode ser adicionado pois a inscrição já foi paga!");
+		}
+		itensInscricao.add(atividade);
+	}
 
 	public Evento getEvento() {
 		return evento;
