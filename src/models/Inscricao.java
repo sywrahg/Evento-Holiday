@@ -1,8 +1,7 @@
 package models;
 
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Random;
+import java.util.List;
 
 import enums.StatusInscricao;
 
@@ -13,18 +12,8 @@ public class Inscricao {
 	private Calendar dataVencimento;
 	private StatusInscricao status;
 	private Evento evento;
-	
-	protected void pagarInscricao(){
-		this.status = StatusInscricao.PAGO;
-	}
-	
-	protected void vencerInscricao(){
-		this.status = StatusInscricao.VENCIDA;
-	}
-	
-	protected void validarInscricao(){
-		this.status = StatusInscricao.VALIDADA;
-	}
+	private Pagamento pagamento;
+	private List<Atividade> itensInscricao;
 	
 	public Inscricao(Usuario inscrito) {
 		super();
@@ -32,6 +21,12 @@ public class Inscricao {
 		this.codigo = 0;
 		this.dataInscricao = Calendar.getInstance();
 		this.status = StatusInscricao.PENDENTE;
+	}
+	
+	public void efetuarPagamento(Usuario responsavel){
+		pagamento.CalculoPagamento(itensInscricao);
+		pagamento.Pagar(responsavel);
+		this.status = StatusInscricao.PAGO;
 	}
 
 	public Evento getEvento() {
@@ -64,6 +59,21 @@ public class Inscricao {
 	}
 	public StatusInscricao getStatus() {
 		return status;
+	}
+	public Pagamento getPagamento() {
+		return pagamento;
+	}
+
+	public void setPagamento(Pagamento pagamento) {
+		this.pagamento = pagamento;
+	}
+
+	public void setStatus(StatusInscricao status) {
+		this.status = status;
+	}
+
+	public void setEvento(Evento evento) {
+		this.evento = evento;
 	}
 	
 }
