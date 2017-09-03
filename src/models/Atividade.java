@@ -16,6 +16,7 @@ public class Atividade {
 	private List<Atividade> atividadesProibidas;
 	private ResponsavelAtividade responsavel;
 	
+
 	public Atividade(){
 		
 	}
@@ -120,5 +121,4 @@ public class Atividade {
 		this.responsavel = responsavel;
 	}
 
-	
 }

@@ -3,7 +3,7 @@ package models;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.swing.JOptionPane;
+import enums.TipoEvento;
 
 import enums.TipoEvento;
 
