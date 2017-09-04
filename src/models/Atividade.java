@@ -40,28 +40,7 @@ public class Atividade {
 		this.tipoAtividade = TipoAtividade.PADRAO; 
 	}
 	
-	public void verificaConcomitancia(List<Atividade> itensInscricao) throws RuntimeException{
-		for (Atividade item : itensInscricao) {
-			for (Atividade atividade : this.atividadesProibidas) {
-				if(item == atividade){
-					throw new RuntimeException("Você está tentando se inscrever em atividades não compatíveis");
-				}else{
-					verificaChoqueHorario(itensInscricao);
-				}
-			}
-		}
-	}
-	
-	public void verificaChoqueHorario(List<Atividade> itensInscricao) throws RuntimeException{
-		for (int i = 0; i < itensInscricao.size(); i++) {
-			for (int j = i+1; j < itensInscricao.size(); j++) {
-				if((itensInscricao.get(i).horaInicial.getTimeInMillis() >= itensInscricao.get(j).horaInicial.getTimeInMillis() && itensInscricao.get(i).horaInicial.getTimeInMillis() <= itensInscricao.get(j).horaTermino.getTimeInMillis()
-				)||(itensInscricao.get(i).horaInicial.getTimeInMillis() >= itensInscricao.get(j).horaInicial.getTimeInMillis() && itensInscricao.get(i).horaTermino.getTimeInMillis() <= itensInscricao.get(j).horaTermino.getTimeInMillis())){
-					throw new RuntimeException("Choque de horário na atividade");
-				}
-			}		
-		}
-	}
+
 		
 	public String getNome() {
 		return nome;
