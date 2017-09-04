@@ -28,6 +28,27 @@ public class Inscricao {
 		pagamento.Pagar(responsavel);
 		this.status = StatusInscricao.PAGO;
 	}
+	
+	public void addItemInscricao(Atividade atividade) throws RuntimeException{
+		if(status == StatusInscricao.PAGO){
+			throw new RuntimeException("O item - " + atividade + " - não pode ser adicionado pois a inscrição já foi paga!");
+		}
+		verificaRepeticaoItemInscricao(atividade);
+		verificaMesmoEventoDosItens(atividade);
+		itensInscricao.add(atividade);
+	}
+	
+	public void verificaRepeticaoItemInscricao(Atividade atividade) throws RuntimeException{
+		if(itensInscricao.contains(atividade)){
+			throw new RuntimeException("O item - " + atividade + " -  já foi adicionado anteriormente.");
+		}
+	}
+	
+	public void verificaMesmoEventoDosItens(Atividade atividade){
+		if(!(evento.getAtividades().contains(atividade))){
+			throw new RuntimeException("O iten - " + atividade + "não pertence ao evento em questão (" + evento + ")");
+		}
+	}
 
 	public Evento getEvento() {
 		return evento;
