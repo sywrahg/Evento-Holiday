@@ -18,6 +18,7 @@ public class Evento {
 	private List<Tag> tags;
 	private List<Atividade> atividades;
 	private Usuario criadorEvento;
+	private String entradaValidada = "";
 	protected List<Usuario> organizadoresEvento;
 	protected List<Instituicao> instituicoesOrganizadoras;
 	protected Evento eventoPai;
@@ -82,6 +83,10 @@ public class Evento {
 		if(eventoPai == null && isOrganizador(u)){
 			eventosFilhos.add(e);
 		}
+	}
+	public String validarEntrada(String validar) {
+		String string = this.entradaValidada = this.entradaValidada;
+		return string;
 	}
 	public boolean isOrganizador(Usuario u){
 		if (this.getCriadorEvento().equals(u) || this.getOrganizadoresEvento().contains(u));
