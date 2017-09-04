@@ -33,6 +33,8 @@ public class Inscricao {
 		if(status == StatusInscricao.PAGO){
 			throw new RuntimeException("O item - " + atividade + " - não pode ser adicionado pois a inscrição já foi paga!");
 		}
+		//saber se atividade n está repetindo
+		//saber se atividade faz parte do evento
 		itensInscricao.add(atividade);
 	}
 
