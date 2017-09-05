@@ -22,7 +22,7 @@ public class Evento {
 	protected List<Instituicao> instituicoesOrganizadoras;
 	protected Evento eventoPai;
 	protected List<Evento> eventosFilhos;
-	protected List<String> espacos;
+	protected List<EspacoFisico> espacos;
 	protected List<Inscricao> inscricoes;
 
 	public Evento(String nome) {
@@ -38,7 +38,8 @@ public class Evento {
 	}
 	
 	protected void addEspaco(String espaco){
-		espacos.add(espaco);
+		EspacoFisico ef = new EspacoFisico(espaco, "");
+		espacos.add(ef);
 	}
 	protected void removeEspaco(String espaco){
 		espacos.remove(espaco);
@@ -102,7 +103,7 @@ public class Evento {
 	public String getDescricao() {
 		return descricao;
 	}
-	public List<String> getEspacos() {
+	public List<EspacoFisico> getEspacos() {
 		return espacos;
 	}
 	public Evento getEventoPai() {
