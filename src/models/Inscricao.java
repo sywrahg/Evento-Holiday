@@ -30,24 +30,47 @@ public class Inscricao {
 	}
 	
 	public void addItemInscricao(Atividade atividade) throws RuntimeException{
-		if(status == StatusInscricao.PAGO){
+		if(this.status == StatusInscricao.PAGO){
 			throw new RuntimeException("O item - " + atividade + " - não pode ser adicionado pois a inscrição já foi paga!");
 		}
-		verificaRepeticaoItemInscricao(atividade);
+		
 		verificaMesmoEventoDosItens(atividade);
+		verificaChoqueHorario(atividade);
 		itensInscricao.add(atividade);
 	}
 	
 	public void verificaRepeticaoItemInscricao(Atividade atividade) throws RuntimeException{
-		if(itensInscricao.contains(atividade)){
+		if(this.itensInscricao.contains(atividade)){
 			throw new RuntimeException("O item - " + atividade + " -  já foi adicionado anteriormente.");
 		}
 	}
 	
+	public void verificaChoqueHorario(Atividade item) throws RuntimeException{
+		for (int i = 0; i < itensInscricao.size(); i++) {
+			if((item.getHoraInicial().getTimeInMillis() >= itensInscricao.get(i).getHoraInicial().getTimeInMillis() && item.getHoraInicial().getTimeInMillis() <= itensInscricao.get(i).getHoraTermino().getTimeInMillis()) 
+			|| (item.getHoraInicial().getTimeInMillis() >= itensInscricao.get(i).getHoraInicial().getTimeInMillis() && item.getHoraTermino().getTimeInMillis() <= itensInscricao.get(i).getHoraTermino().getTimeInMillis())){
+				throw new RuntimeException("Choque de horário na atividade");
+			}else{
+				verificaConcomitancia(item);
+			}
+		}
+	}
+
+	public void verificaConcomitancia(Atividade a) throws RuntimeException{
+		for (Atividade item : this.itensInscricao) {
+			for (Atividade atividade : item.getAtividadesProibidas()) {
+				if(a == atividade){
+					throw new RuntimeException("Você está tentando se inscrever em atividades não compatíveis");
+				}
+			}
+		}
+	}
+	
 	public void verificaMesmoEventoDosItens(Atividade atividade){
-		if(!(evento.getAtividades().contains(atividade))){
+		if(!(this.evento.getAtividades().contains(atividade))){
 			throw new RuntimeException("O iten - " + atividade + "não pertence ao evento em questão (" + evento + ")");
 		}
+		verificaRepeticaoItemInscricao(atividade);
 	}
 
 	public Evento getEvento() {
