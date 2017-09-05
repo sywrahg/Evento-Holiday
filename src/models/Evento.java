@@ -5,7 +5,6 @@ import java.util.List;
 
 import enums.TipoEvento;
 
-import enums.TipoEvento;
 
 public class Evento {
 	private int codigo;
