@@ -13,5 +13,9 @@ public class EspacoFisicoComposto extends EspacoFisico {
 	public void addEspaco(EspacoFisico ef){
 		this.espacos.add(ef);
 	}
+	
+	public EspacoFisico getEspaco(int index){
+		return espacos.get(index);
+	}
 
 }
