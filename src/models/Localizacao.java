@@ -3,7 +3,14 @@ package models;
 public class Localizacao {
 	private String cidade;
 	private String estado;
+	private String endereco;
 	
+	public String getEndereco() {
+		return endereco;
+	}
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
 	public Localizacao(String cidade, String estado) {
 		super();
 		this.cidade = cidade;
