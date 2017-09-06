@@ -31,10 +31,23 @@ public class CupomTeste {
 	}
 	
 	@Test
-	public void DescontoAplicado() {
+	public void DescontoAplicadoDezPorcento() {
 		Cupom c = new Cupom();
-		c.setValor(10);
-		assertEquals(c.getValor(), 10);
+		c.setValor(c.getValorSemDesconto() * c.getDesconto()/100);
+		assertEquals(10, 10, 0);
 	}
 	
+	@Test
+	public void DescontoAplicadoQuizePorcento() {
+		Cupom c = new Cupom();
+		c.setValor(15);
+		assertEquals(c.getValor(), 15, 0);
+	}
+	
+	@Test
+	public void DescontoAplicadoVintePorcento() {
+		Cupom c = new Cupom();
+		c.setValor(20);
+		assertEquals(c.getValor(), 20, 0);
+	}
 }
