@@ -2,6 +2,7 @@ package models;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
 import enums.StatusInscricao;
 
@@ -21,6 +22,10 @@ public class Inscricao {
 		this.codigo = 0;
 		this.dataInscricao = Calendar.getInstance();
 		this.status = StatusInscricao.PENDENTE;
+	}
+	
+	public Usuario validarEntrada(Usuario validado) {
+		return this.inscrito = validado;
 	}
 	
 	public void efetuarPagamento(Usuario responsavel){
