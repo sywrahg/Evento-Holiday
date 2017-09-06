@@ -1,5 +1,6 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Observable;
@@ -30,6 +31,7 @@ public class Atividade extends Observable{
 		this.valor = valor;
 		this.registrador = registrador;
 		this.responsavel = responsavel;
+		atividadesProibidas = new ArrayList<Atividade>();
 	}
 	
 	public void AtividadePadrao(String nome, Calendar horaInicio, Calendar horaFim, String local){
@@ -39,8 +41,6 @@ public class Atividade extends Observable{
 		this.local = local;
 		this.tipoAtividade = TipoAtividade.PADRAO; 
 	}
-	
-
 		
 	public String getNome() {
 		return nome;

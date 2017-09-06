@@ -6,7 +6,6 @@ import java.util.List;
 
 import enums.TipoEvento;
 
-import enums.TipoEvento;
 
 import java.util.Observer;
 
@@ -146,8 +145,8 @@ public class Evento extends Observable{
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	public void setLocal(String cidade, String estado) {
-		Localizacao l = new Localizacao(cidade,estado);
+	public void setLocal(String cidade, String estado, String cep, String endereco) {
+		Localizacao l = new Localizacao(cidade,estado,cep, endereco);
 		this.local = l;
 		setChanged();
 		notifyObservers();
@@ -162,4 +161,10 @@ public class Evento extends Observable{
 		setChanged();
 		notifyObservers();
 	}
+
+	public void setAtividades(List<Atividade> atividades) {
+		this.atividades = atividades;
+	}
+	
+	
 }
