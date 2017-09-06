@@ -1,13 +1,18 @@
 package models;
 
 import java.util.Calendar;
+
 import java.util.List;
 
 import enums.TipoEvento;
 
 import enums.TipoEvento;
 
-public class Evento {
+import java.util.Observer;
+
+import java.util.Observable;
+
+public class Evento extends Observable{
 	private int codigo;
 	private String nome;
 	private String descricao;
@@ -34,6 +39,8 @@ public class Evento {
 	protected void addAtividade(Usuario u){
 		if (isOrganizador(u)) {
 			this.atividades.add(new Atividade());
+			setChanged();
+			notifyObservers();
 		}
 	}
 	
@@ -68,15 +75,21 @@ public class Evento {
 		Inscricao i = new Inscricao(u);
 		this.inscricoes.add(i);
 		u.getEventosInscritos().add(this);
+		setChanged();
+		notifyObservers(u);
 	}
 	protected void removeInscricao(Inscricao i){
 		i.getInscrito().getEventosInscritos().remove(i);
 		this.inscricoes.remove(i);
+		setChanged();
+		notifyObservers(i.getInscrito());
 	}
 	protected void addSubEvento(Usuario u, Evento e){
 		if(eventoPai == null && isOrganizador(u)){
 			eventosFilhos.add(e);
 			e.eventoPai = this;
+			setChanged();
+			notifyObservers();
 		}
 	}
 	protected void removeSubEvento(Usuario u, Evento e){
@@ -94,17 +107,8 @@ public class Evento {
 	public int getCodigo() {
 		return codigo;
 	}
-	public Calendar getDataInicial() {
-		return dataInicial;
-	}
-	public Calendar getDataTermino() {
-		return dataTermino;
-	}
 	public String getDescricao() {
 		return descricao;
-	}
-	public List<EspacoFisico> getEspacos() {
-		return espacos;
 	}
 	public Evento getEventoPai() {
 		return eventoPai;
@@ -133,9 +137,6 @@ public class Evento {
 	public Usuario getCriadorEvento() {
 		return criadorEvento;
 	}
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
-	}
 	public void setDataInicial(Calendar dataInicial) {
 		this.dataInicial = dataInicial;
 	}
@@ -148,13 +149,17 @@ public class Evento {
 	public void setLocal(String cidade, String estado) {
 		Localizacao l = new Localizacao(cidade,estado);
 		this.local = l;
+		setChanged();
+		notifyObservers();
 	}
-	
 	public void setNome(String nome) {
 		this.nome = nome;
+		setChanged();
+		notifyObservers();
 	}
-
 	public void setTipoEvento(TipoEvento tipoEvento) {
 		this.tipoEvento = tipoEvento;
+		setChanged();
+		notifyObservers();
 	}
 }
