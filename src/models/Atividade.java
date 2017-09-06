@@ -41,15 +41,6 @@ public class Atividade {
 		this.local = local;
 		this.tipoAtividade = TipoAtividade.PADRAO; 
 	}
-	
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> dcf540cd95290d313cfe23f0ebebebaea088033a
-=======
-
->>>>>>> dcf540cd95290d313cfe23f0ebebebaea088033a
 		
 	public String getNome() {
 		return nome;
