@@ -1,8 +1,8 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Map;
 
 import enums.StatusInscricao;
 
@@ -22,6 +22,11 @@ public class Inscricao {
 		this.codigo = 0;
 		this.dataInscricao = Calendar.getInstance();
 		this.status = StatusInscricao.PENDENTE;
+		itensInscricao = new ArrayList<Atividade>();
+	}
+	
+	public Usuario validarEntrada(Usuario validado) {
+		return this.inscrito = validado;
 	}
 	
 	public Usuario validarEntrada(Usuario validado) {
@@ -29,6 +34,9 @@ public class Inscricao {
 	}
 	
 	public void efetuarPagamento(Usuario responsavel){
+		if(this.status == StatusInscricao.PAGO){
+			throw new RuntimeException("Essa inscrição já foi paga anteriormente!!");
+		}
 		pagamento.CalculoPagamento(itensInscricao);
 		pagamento.Pagar(responsavel);
 		this.status = StatusInscricao.PAGO;
@@ -75,7 +83,8 @@ public class Inscricao {
 		if(!(this.evento.getAtividades().contains(atividade))){
 			throw new RuntimeException("O iten - " + atividade + "não pertence ao evento em questão (" + evento + ")");
 		}
-		verificaRepeticaoItemInscricao(atividade);
+		verificaRepeticaoItemInscricao(atividade);		
+
 	}
 
 	public Evento getEvento() {
@@ -124,5 +133,14 @@ public class Inscricao {
 	public void setEvento(Evento evento) {
 		this.evento = evento;
 	}
+
+	public List<Atividade> getItensInscricao() {
+		return itensInscricao;
+	}
+
+	public void setItensInscricao(List<Atividade> itensInscricao) {
+		this.itensInscricao = itensInscricao;
+	}
+	
 	
 }

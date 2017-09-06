@@ -5,7 +5,6 @@ import java.util.List;
 
 import enums.TipoEvento;
 
-import enums.TipoEvento;
 
 public class Evento {
 	private int codigo;
@@ -157,4 +156,10 @@ public class Evento {
 	public void setTipoEvento(TipoEvento tipoEvento) {
 		this.tipoEvento = tipoEvento;
 	}
+
+	public void setAtividades(List<Atividade> atividades) {
+		this.atividades = atividades;
+	}
+	
+	
 }
