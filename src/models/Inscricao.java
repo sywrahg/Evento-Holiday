@@ -16,6 +16,9 @@ public class Inscricao {
 	private Pagamento pagamento;
 	private List<Atividade> itensInscricao;
 	
+	public Inscricao(){
+		
+	}
 	public Inscricao(Usuario inscrito) {
 		super();
 		this.inscrito = inscrito;
@@ -23,10 +26,6 @@ public class Inscricao {
 		this.dataInscricao = Calendar.getInstance();
 		this.status = StatusInscricao.PENDENTE;
 		itensInscricao = new ArrayList<Atividade>();
-	}
-	
-	public Usuario validarEntrada(Usuario validado) {
-		return this.inscrito = validado;
 	}
 	
 	public Usuario validarEntrada(Usuario validado) {

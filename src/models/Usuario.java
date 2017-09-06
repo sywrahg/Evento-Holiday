@@ -14,6 +14,10 @@ public class Usuario implements Observer{
 	private List<Evento> eventosOrganizados;
 	private List<Evento> eventosInscritos;
 	
+	public Usuario(){
+		
+	}
+	
 	public Usuario(String nome, String login, String senha) {
 		super();
 		this.nome = nome;
@@ -65,6 +69,21 @@ public class Usuario implements Observer{
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
+	}
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public void setEventosCriados(List<Evento> eventosCriados) {
+		this.eventosCriados = eventosCriados;
+	}
+
+	public void setEventosOrganizados(List<Evento> eventosOrganizados) {
+		this.eventosOrganizados = eventosOrganizados;
+	}
+
+	public void setEventosInscritos(List<Evento> eventosInscritos) {
+		this.eventosInscritos = eventosInscritos;
 	}
 
 	@Override
