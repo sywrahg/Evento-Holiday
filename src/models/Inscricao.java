@@ -30,6 +30,10 @@ public class Inscricao {
 		return this.inscrito = validado;
 	}
 	
+	public Usuario validarEntrada(Usuario validado) {
+		return this.inscrito = validado;
+	}
+	
 	public void efetuarPagamento(Usuario responsavel){
 		if(this.status == StatusInscricao.PAGO){
 			throw new RuntimeException("Essa inscrição já foi paga anteriormente!!");
@@ -81,7 +85,11 @@ public class Inscricao {
 			throw new RuntimeException("O iten - " + atividade + "não pertence ao evento em questão (" + evento + ")");
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		verificaRepeticaoItemInscricao(atividade);		
+=======
+		verificaRepeticaoItemInscricao(atividade);
+>>>>>>> dcf540cd95290d313cfe23f0ebebebaea088033a
 =======
 		verificaRepeticaoItemInscricao(atividade);
 >>>>>>> dcf540cd95290d313cfe23f0ebebebaea088033a

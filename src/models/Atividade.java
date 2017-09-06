@@ -43,6 +43,10 @@ public class Atividade {
 	}
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> dcf540cd95290d313cfe23f0ebebebaea088033a
 =======
 
 >>>>>>> dcf540cd95290d313cfe23f0ebebebaea088033a
