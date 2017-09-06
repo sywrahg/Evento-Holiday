@@ -21,7 +21,7 @@ public class Evento {
 	protected List<Instituicao> instituicoesOrganizadoras;
 	protected Evento eventoPai;
 	protected List<Evento> eventosFilhos;
-	protected List<String> espacos;
+	protected List<EspacoFisico> espacos;
 	protected List<Inscricao> inscricoes;
 
 	public Evento(String nome) {
@@ -37,7 +37,8 @@ public class Evento {
 	}
 	
 	protected void addEspaco(String espaco){
-		espacos.add(espaco);
+		EspacoFisico ef = new EspacoFisico(espaco, "");
+		espacos.add(ef);
 	}
 	protected void removeEspaco(String espaco){
 		espacos.remove(espaco);
@@ -101,7 +102,7 @@ public class Evento {
 	public String getDescricao() {
 		return descricao;
 	}
-	public List<String> getEspacos() {
+	public List<EspacoFisico> getEspacos() {
 		return espacos;
 	}
 	public Evento getEventoPai() {
@@ -143,8 +144,8 @@ public class Evento {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	public void setLocal(String cidade, String estado) {
-		Localizacao l = new Localizacao(cidade,estado);
+	public void setLocal(String cidade, String estado, String cep, String endereco) {
+		Localizacao l = new Localizacao(cidade,estado,cep, endereco);
 		this.local = l;
 	}
 	

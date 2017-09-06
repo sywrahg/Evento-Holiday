@@ -3,6 +3,7 @@ package models;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
 import enums.StatusInscricao;
 
@@ -23,6 +24,10 @@ public class Inscricao {
 		this.dataInscricao = Calendar.getInstance();
 		this.status = StatusInscricao.PENDENTE;
 		itensInscricao = new ArrayList<Atividade>();
+	}
+	
+	public Usuario validarEntrada(Usuario validado) {
+		return this.inscrito = validado;
 	}
 	
 	public void efetuarPagamento(Usuario responsavel){
@@ -75,7 +80,11 @@ public class Inscricao {
 		if(!(this.evento.getAtividades().contains(atividade))){
 			throw new RuntimeException("O iten - " + atividade + "não pertence ao evento em questão (" + evento + ")");
 		}
+<<<<<<< HEAD
 		verificaRepeticaoItemInscricao(atividade);		
+=======
+		verificaRepeticaoItemInscricao(atividade);
+>>>>>>> dcf540cd95290d313cfe23f0ebebebaea088033a
 	}
 
 	public Evento getEvento() {

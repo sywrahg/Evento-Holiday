@@ -42,6 +42,10 @@ public class Atividade {
 		this.tipoAtividade = TipoAtividade.PADRAO; 
 	}
 	
+<<<<<<< HEAD
+=======
+
+>>>>>>> dcf540cd95290d313cfe23f0ebebebaea088033a
 		
 	public String getNome() {
 		return nome;
