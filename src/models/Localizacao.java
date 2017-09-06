@@ -13,6 +13,7 @@ public class Localizacao {
 		this.cep = cep;
 		this.endereco = endereco;
 	}
+  
 	public String getCep() {
 		return cep;
 	}
