@@ -3,10 +3,11 @@ package models;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Observable;
 
 import enums.TipoAtividade;
 
-public class Atividade {
+public class Atividade extends Observable{
 	private String nome;
 	private Calendar horaInicial;
 	private Calendar horaTermino;
@@ -19,7 +20,6 @@ public class Atividade {
 	
 
 	public Atividade(){
-		
 	}
 	
 	public Atividade(String nome, Calendar horaInicio, Calendar horaFim, String local, TipoAtividade tipo, double valor, Usuario registrador, ResponsavelAtividade responsavel) {

@@ -1,8 +1,10 @@
 package models;
 
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
-public class Usuario {
+public class Usuario implements Observer{
 	private String CPF;
 	private String nome;
 	private String login;
@@ -68,6 +70,11 @@ public class Usuario {
 	@Override
 	public String toString() {
 		return "Usuario [nome=" + nome + ", login=" + login + ", senha=" + senha + "]";
+	}
+	@Override
+	public void update(Observable o, Object arg) {
+		System.out.println("Houveram alterações em um evento");
+		
 	}
 	
 }
