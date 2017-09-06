@@ -10,7 +10,7 @@ public class Cupom {
 	private String data;
 	private double valor;
 	private double valorSemDesconto;
-	private double desconto;
+	public double desconto;
 	private double valorTotal;
 	
 	public boolean validarCodigoDoCupom (String validarCodigo) {
